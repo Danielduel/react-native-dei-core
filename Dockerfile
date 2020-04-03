@@ -63,10 +63,7 @@ RUN set -xeo pipefail \
   && /usr/local/bin/install_android_sdk.sh
 
 # yarn is a part of alpine-node
-WORKDIR /code
-ADD package*.json .
-ADD yarn.lock .
-RUN yarn install && yarn global add react-native-cli
+RUN yarn global add react-native-cli
 
 # Expose default ADB port
 EXPOSE 5037
