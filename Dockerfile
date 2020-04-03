@@ -5,16 +5,21 @@ FROM node:13.12.0-alpine3.11
 # To be honest - update-platform-tools.sh is doing stuff with repos and certs,
 # I haven't checked that for safety.
 #
-ADD .image/files/install_adb.sh /usr/local/bin/install_adb.sh
-ADD .image/files/update-platform-tools.sh /usr/local/bin/update-platform-tools.sh
+COPY .image/files/install_adb.sh /usr/local/bin/install_adb.sh
+COPY .image/files/update-platform-tools.sh /usr/local/bin/update-platform-tools.sh
 #
 # Android sdk things
 #
-ADD .image/files/install_android_sdk.sh /usr/local/bin/install_android_sdk.sh
+COPY .image/files/install_android_sdk.sh /usr/local/bin/install_android_sdk.sh
 #
 # Services aren't used now, probably will change later.
 #
-ADD .image/systemd/* /etc/systemd/system/
+COPY .image/systemd/* /etc/systemd/system/
+
+#
+# Setup permissions
+#
+RUN chmod +x /usr/local/bin/install_adb.sh /usr/local/bin/update-platform-tools.sh /usr/local/bin/install_android_sdk.sh
 
 #
 # Envs for android sdk
