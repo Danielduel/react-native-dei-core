@@ -61,7 +61,7 @@ RUN set -xeo pipefail \
 WORKDIR /code
 ADD package*.json .
 ADD yarn.lock .
-RUN yarn install
+RUN yarn install && yarn global add react-native-cli
 
 # Expose default ADB port
 EXPOSE 5037
